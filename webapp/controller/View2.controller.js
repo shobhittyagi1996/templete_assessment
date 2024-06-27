@@ -301,55 +301,56 @@ sap.ui.define([
 
             },
             onSaveTemplate: function () {
-                function generateUniqueId() {
-                    const prefix = "TEM";
+                function generateUniqueId(prefix) {
                     const date = new Date();
                     const dateString = date.toISOString().replace(/[-:.TZ]/g, "");
                     return `${prefix}${dateString}`;
                 }
+             
                 let oModel = this.getOwnerComponent().getModel();
                 let title = this.getView().byId("inp1").getValue();
                 let assesmentType = this.getView().byId("Select1112").getSelectedItem().getText();
                 let active = "true";
-                let templetId = generateUniqueId();
-
+                let templetId = generateUniqueId("TEM");
+             
                 let aTableData = [];
                 let oTable = this.getView().byId("idSelectedQuestionsTable");
                 let aItems = oTable.getItems();
-
-                aItems.forEach(function (oItem) {
-                    let question = oItem.getCells()[0].getText();
-                    let category = oItem.getCells()[1].getText();
-
-
-                    aTableData.push({
-                        // Id: 'aafdf',
-                        questionId_templetId: templetId, // Reference to the parent key
-                        questions: question,
-                        category: category,
-
-
-                    });
+             
+                aItems.forEach(function (oItem, index) {
+                    setTimeout(function () {
+                        let question = oItem.getCells()[0].getText();
+                        let category = oItem.getCells()[1].getText();
+                        let id = generateUniqueId("ID");
+             
+                        aTableData.push({
+                            Id: id,
+                            parentKey_templetId: templetId, // Reference to the parent key
+                            questions: question,
+                            category: category,
+                        });
+             
+                        // If it's the last item, save the data
+                        if (index === aItems.length - 1) {
+                            let headerData = {
+                                templetId: templetId,
+                                templetTitle: title,
+                                assesmentType: assesmentType,
+                                active: active,
+                                lineItems: aTableData // Nested line items
+                            };
+             
+                            oModel.create("/Manage_assesment_templetT", headerData, {
+                                success: function (data) {
+                                    sap.m.MessageBox.success("Data saved");
+                                },
+                                error: function () {
+                                    sap.m.MessageBox.error("Error saving data");
+                                }
+                            });
+                        }
+                    }, index * 10); // Delay of 10 milliseconds between each ID generation
                 });
-
-                let headerData = {
-                    templetId: templetId,
-                    templetTitle: title,
-                    assesmentType: assesmentType,
-                    active: active,
-
-                    lineItems: aTableData // Nested line items
-                };
-                oModel.create("/Manage_assesment_templetT", headerData, {
-                    success: function (data) {
-                        sap.m.MessageBox.success("Data saved");
-                    },
-                    error: function () {
-                        sap.m.MessageBox.error("Error saving data");
-                    }
-
-                });
-
             }
 
         });

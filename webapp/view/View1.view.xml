@@ -11,7 +11,7 @@
         <content>
             <Table
                 id="Table"
-                items="{myModel>/}"
+                items="{/Manage_assesment_templetT}"
                   mode="SingleSelectLeft"
             >
                 <headerToolbar>
@@ -91,19 +91,19 @@
                         <cells>
                             <Text
                                 id="_IDGenText6"
-                                text="{myModel>templeteid}"
+                                text="{templetId}"
                             />
                             <Text
                                 id="_IDGenText7"
-                                text="{myModel>templetetitle}"
+                                text="{templetTitle}"
                             />
                             <Text
                                 id="_IDGenText8"
-                                text="{myModel>assessmenttype}"
+                                text="{assesmentType}"
                             />
                             <CheckBox
                                
-                                selected="true"
+                                selected="{active}"
                             />
 
                             
