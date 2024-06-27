@@ -1,0 +1,137 @@
+<mvc:View
+    controllerName="com.sap.project1.controller.DisplayTemplate"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:uxap="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <uxap:ObjectPageLayout
+                id="ObjectPageLayout1"
+                upperCaseAnchorBar="false"
+                showAnchorBar="true"
+                enableLazyLoading="true"
+            >
+                <uxap:sections>
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection1">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection
+                                id="_IDGenObjectPageSubSection1"
+                                title="Templete Details"
+                                titleUppercase="false"
+                            >
+                                <uxap:blocks>
+                                    <f:SimpleForm
+                                        id="supplierForm1"
+                                        layout="ResponsiveGridLayout"
+                                        labelSpanXL="3"
+                                        labelSpanL="3"
+                                        labelSpanM="3"
+                                        labelSpanS="12"
+                                        adjustLabelSpan="false"
+                                    >
+                                        <Label
+                                            id="_IDGenLabel1"
+                                            text="Title"
+                                            class="sapUiTinyMarginTop"
+                                        />
+                                        <Input
+                                           
+                                            value="Market Intelligence Template 2024 April"
+                                            editable="true"
+                                            width="20rem"
+                                            
+                                            
+                                        />
+
+                                        <Label
+                                            id="_IDGenLabel2"
+                                            text="Assessment Type"
+                                            class="sapUiTinyMarginTop"
+                                        />
+                                        <Input
+                                            id="_IDGenInput2"
+                                            value="Market Intelligence Questionnaire"
+                                            editable="false"
+                                            width="20rem"
+                                            
+                                        />
+                                    </f:SimpleForm>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+
+                            <uxap:ObjectPageSubSection
+                                id="_IDGenObjectPageSubSection2"
+                                title="Questions for Assessment"
+                            >
+                                <uxap:blocks>
+                                    <Table
+                                        id="Table1"
+                                        items="{myModel>/}"
+                                    >
+                                      <headerToolbar>
+                                    <Toolbar id="_IDGenToolbar1">
+                                       <ToolbarSpacer/>
+                                       <Button text="Add Questions" press="AddQuestion"/>
+                                        <Button text="Delete" press="DeleteQuestion"/>
+                                    </Toolbar>
+                                </headerToolbar>
+                                        <columns>
+                                            <Column id="_IDGenColn1">
+                                                <Text
+                                                    id="_IDGenTt2"
+                                                    text="Questions"
+                                                />
+                                            </Column>
+                                            <Column id="_IDGenCol2">
+                                                <Text
+                                                    id="_IDGenTt3"
+                                                    text="Category"
+                                                />
+                                            </Column>
+                                        </columns>
+                                        <items>
+                                            <ColumnListItem id="_IDGenColu1">
+                                                <cells>
+                                                    <Text
+                                                        id="_IDGenT6"
+                                                        text="{myModel>question}"
+                                                    />
+                                                    <Text
+                                                        id="_IDGenT7"
+                                                        text="{myModel>category}"
+                                                    />
+                                                </cells>
+                                            </ColumnListItem>
+                                        </items>
+                                    </Table>
+                                </uxap:blocks>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+            </uxap:ObjectPageLayout>
+        </content>
+          <footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+
+                <Button
+                    
+                    text="Save"
+                    type="Accept"
+                />
+              
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>

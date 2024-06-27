@@ -1,0 +1,116 @@
+<mvc:View
+    controllerName="com.sap.project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+    <Page
+        id="page"
+        title="{i18n>title}"
+    >
+        <content>
+            <Table
+                id="Table"
+                items="{myModel>/}"
+                  mode="SingleSelectLeft"
+            >
+                <headerToolbar>
+                    <Toolbar id="_IDGenToolbar1">
+                       <ToolbarSpacer/>
+                            <SearchField
+                                id="_IDGenSearchField1"
+                                width="20%"
+                                liveChange="onchange"
+                                class="sapUiTinyMarginEnd"
+                                
+                            />
+                                                                                    
+                           
+                             <Button id="_IDGenButton3"
+                            text="Create Assessment Templete"
+                            type="Emphasized"
+                            press="onCreateVendor"
+                            class="sapUiTinyMarginBegin"
+                            
+                            />
+
+                              <Button
+                            text="Modify"
+                            press="onModify"
+                            class="sapUiTinyMarginBegin"
+                            
+                            />
+                             <Button
+                            text="Delete"
+                            press="onDelete"
+                            class="sapUiTinyMarginBegin"
+                            
+                            />
+
+                             <Button
+                            text="Save"
+                            press="onSave"
+                            type="Accept"
+                            class="sapUiTinyMarginBegin"
+                            
+                            />
+                                                        
+                       
+                    </Toolbar>
+                </headerToolbar>
+                <columns>
+                    <Column id="_IDGenColumn1">
+                        <Text
+                            id="_IDGenText2"
+                            text="Templete ID"
+                        />
+                    </Column>
+                    <Column id="_IDGenColumn2">
+                        <Text
+                            id="_IDGenText3"
+                            text="Templete title"
+                        />
+                    </Column>
+                    <Column id="_IDGenColumn3">
+                        <Text
+                            id="_IDGenText4"
+                            text="Assessment type"
+                        />
+                    </Column>
+                    <Column id="_IDGenColumn4">
+                        <Text
+                            id="_IDGenText5"
+                            text="Active"
+                        />
+                    </Column>
+
+             
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1">
+                        <cells>
+                            <Text
+                                id="_IDGenText6"
+                                text="{myModel>templeteid}"
+                            />
+                            <Text
+                                id="_IDGenText7"
+                                text="{myModel>templetetitle}"
+                            />
+                            <Text
+                                id="_IDGenText8"
+                                text="{myModel>assessmenttype}"
+                            />
+                            <CheckBox
+                               
+                                selected="true"
+                            />
+
+                            
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

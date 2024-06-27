@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="CatalogService" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="Manage_questionnaireT" EntityType="CatalogService.Manage_questionnaireT"/>
+                <EntitySet Name="Manage_assesment_templetT" EntityType="CatalogService.Manage_assesment_templetT"/>
+                <EntitySet Name="Manage_assesment_lineItemT" EntityType="CatalogService.Manage_assesment_lineItemT"/>
+                <EntitySet Name="Manage_AssessmentsT" EntityType="CatalogService.Manage_AssessmentsT"/>
+                <AssociationSet Name="Manage_assesment_lineItemT_questionId" Association="CatalogService.Manage_assesment_lineItemT_questionId">
+                    <End Role="Manage_assesment_lineItemT" EntitySet="Manage_assesment_lineItemT"/>
+                    <End Role="Manage_assesment_templetT" EntitySet="Manage_assesment_templetT"/>
+                </AssociationSet>
+            </EntityContainer>
+            <EntityType Name="Manage_questionnaireT">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="questionID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="questionID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="questionTitle" Type="Edm.String"/>
+                <Property Name="questionCategory" Type="Edm.String"/>
+                <Property Name="active" Type="Edm.Boolean"/>
+                <Property Name="responsetype" Type="Edm.String"/>
+                <Property Name="attachmentRequired" Type="Edm.Boolean"/>
+            </EntityType>
+            <EntityType Name="Manage_assesment_templetT">
+                <Key>
+                    <PropertyRef Name="templetId"/>
+                </Key>
+                <Property Name="templetId" Type="Edm.String" Nullable="false"/>
+                <Property Name="templetTitle" Type="Edm.String"/>
+                <Property Name="assesmentType" Type="Edm.String"/>
+                <Property Name="active" Type="Edm.Boolean"/>
+                <NavigationProperty Name="lineItems" Relationship="CatalogService.Manage_assesment_lineItemT_questionId" FromRole="Manage_assesment_templetT" ToRole="Manage_assesment_lineItemT"/>
+            </EntityType>
+            <EntityType Name="Manage_assesment_lineItemT">
+                <Key>
+                    <PropertyRef Name="questionId_templetId"/>
+                </Key>
+                <NavigationProperty Name="questionId" Relationship="CatalogService.Manage_assesment_lineItemT_questionId" FromRole="Manage_assesment_lineItemT" ToRole="Manage_assesment_templetT"/>
+                <Property Name="questionId_templetId" Type="Edm.String" Nullable="false"/>
+                <Property Name="questions" Type="Edm.String"/>
+                <Property Name="category" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Manage_AssessmentsT">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="assesmentId"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="assesmentId" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="assesmenttitle" Type="Edm.String"/>
+                <Property Name="assesmentType" Type="Edm.String"/>
+            </EntityType>
+            <Association Name="Manage_assesment_lineItemT_questionId">
+                <End Role="Manage_assesment_lineItemT" Type="CatalogService.Manage_assesment_lineItemT" Multiplicity="*"/>
+                <End Role="Manage_assesment_templetT" Type="CatalogService.Manage_assesment_templetT" Multiplicity="0..1">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <ReferentialConstraint>
+                    <Principal Role="Manage_assesment_templetT">
+                        <PropertyRef Name="templetId"/>
+                    </Principal>
+                    <Dependent Role="Manage_assesment_lineItemT">
+                        <PropertyRef Name="questionId_templetId"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Annotations Target="CatalogService.Manage_questionnaireT/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Manage_questionnaireT/questionID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Manage_AssessmentsT/ID" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+            <Annotations Target="CatalogService.Manage_AssessmentsT/assesmentId" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
